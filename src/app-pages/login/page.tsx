@@ -1,6 +1,6 @@
 
 import { LoginForm } from "@/components/login-form";
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router";
 
 
 export default function LoginPage() {
@@ -22,7 +22,7 @@ export default function LoginPage() {
           <a href="#" className="flex items-center gap-2 font-medium">
             <div className="flex h-6 w-6 items-center justify-center text-primary-foreground">
             </div>
-            <img src ="public/LogoExtended.png"/> 
+            <img src="public/LogoExtended.png" alt="Company Logo" /> 
           </a>
         </div>
 

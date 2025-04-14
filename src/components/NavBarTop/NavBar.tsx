@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import { useNavbar } from "@/components/NavBarTop/NavBarContext";
-import { Bell, Calendar, Moon, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Bell, Calendar, Moon, Search } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { navbarTitle } = useNavbar();
