@@ -1,4 +1,3 @@
-import * as React from "react"
 import {
   GalleryVerticalEnd,
   LucideBriefcase,
@@ -10,11 +9,10 @@ import {
   LucideWallet,
   Settings,
 } from "lucide-react"
+import * as React from "react"
 
 import { NavMain } from "@/components/nav-main"
-import FloatingBtn from "@/components/side-barbtn"
 import { NavUser } from "@/components/nav-user"
-import { Header } from "@/components/header"
 
 import {
   Sidebar,
@@ -22,6 +20,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar"
 
 // This is sample data.
@@ -40,10 +39,10 @@ const data = {
   ],
   navMain: [
     {
-      title: "Overview",
+      title: "Dashboard",
       url: "/dashboard",
       icon: LucideLayoutDashboard,
-      section: "Overview",
+      section: "Dashboard",
     },
     {
       title: "Reservations",
@@ -92,28 +91,40 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const customStyles = {
-    "--sidebar-bg": "white", 
-    "--tw-bg-opacity": "1"    
-  } as React.CSSProperties;
+  const {toggleSidebar, open} = useSidebar()
   return (
-    <Sidebar 
-      collapsible="icon" 
-      className="[&]:!bg-white [&_*]:!bg-white [&_[data-sidebar='sidebar']]:!bg-white [&_[data-slot='sidebar-inner']]:!bg-white"
-      style={customStyles}
-      {...props}
-    >
-      <SidebarHeader className="!bg-white">
-        <Header header={data.header} />
+    <Sidebar  collapsible="icon" className="relative" {...props}>
+    <div onClick={toggleSidebar} className=" 
+    absolute -right-3 top-14">
+      {
+        open ? (
+          <img src="./Vector.svg" alt="vector" className="z-25"/>
+        ) : (
+          <img src="./Vectorflip.svg" alt="vector" className="z-25"  />
+        )
+      }
+
+    </div>
+      <SidebarHeader>
+      <div className="flex items-center justify-center border-b-2 p-1" >
+        {
+          open ? (
+            <img src="./GWlogo.svg" alt="Sidebar" className=""  />
+          ) : (
+            <img src="./logostick.svg" alt="Sidebar" className=" relative items-center justify-center "  />
+          )
+        }
+       </div>
       </SidebarHeader>
-      <SidebarContent className="relative !bg-white">
-        <FloatingBtn />
-        <NavMain items={data.navMain} />
+      <SidebarContent className="relative top-2.5 !bg-white p-2.5 overflow-hidden">
+        <div>
+        <NavMain items={data.navMain}/>
+        </div>
       </SidebarContent>
       <SidebarFooter className="!bg-white">
         <NavUser user={data.user} />
       </SidebarFooter>
-      <SidebarRail className="after:!bg-white" />
+      <SidebarRail />
     </Sidebar>
   )
 }

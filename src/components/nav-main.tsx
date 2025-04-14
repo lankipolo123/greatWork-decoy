@@ -1,15 +1,15 @@
 "use client"
 
-import { useState } from "react"
-import { type LucideIcon } from "lucide-react"
-import { Link } from "react-router"  // Import from react-router-dom instead of react-router
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
-} from "@/components/ui/sidebar"
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { type LucideIcon } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router"; // Import from react-router-dom instead of react-router
 
 export function NavMain({
   items,
@@ -24,8 +24,8 @@ export function NavMain({
 }) {
   const [activeTitle, setActiveTitle] = useState<string>(items[0]?.title || "")
 
-  const overviewItem = items.find((item) => item.section === "Overview")
-  const otherItems = items.filter((item) => item.section !== "Overview")
+  const dashboardItem = items.find((item) => item.section === "Dashboard")
+  const otherItems = items.filter((item) => item.section !== "Dashboard")
 
   const sectionMap = new Map<string, typeof items>()
   for (const item of otherItems) {
@@ -42,31 +42,31 @@ export function NavMain({
 
   return (
     <div className="h-full overflow-hidden">
-      {/* Overview section */}
-      {overviewItem && (
+      {/* dashboard section */}
+      {dashboardItem && (
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link to={overviewItem.url}> {/* This is now properly using react-router-dom */}
+            <Link to={dashboardItem.url}> {/* This is now properly using react-router-dom */}
               <SidebarMenuButton
-                onClick={() => setActiveTitle(overviewItem.title)}
-                tooltip={overviewItem.title}
+                onClick={() => setActiveTitle(dashboardItem.title)}
+                tooltip={dashboardItem.title}
                 className={`flex items-center justify-between rounded-none border-l-4 px-6 py-4 text-xl font-semibold ${
-                  activeTitle === overviewItem.title
+                  activeTitle === dashboardItem.title
                     ? "border-red-700 bg-muted text-red-700"
                     : "border-transparent text-muted-foreground"
                 } ml-2`}
               >
                 <div className="flex items-center gap-4">
-                  {overviewItem.icon && (
-                    <overviewItem.icon
+                  {dashboardItem.icon && (
+                    <dashboardItem.icon
                       className={`size-5 ${
-                        activeTitle === overviewItem.title
+                        activeTitle === dashboardItem.title
                           ? "text-red-700"
                           : "text-muted-foreground"
                       }`}
                     />
                   )}
-                  <span>{overviewItem.title}</span>
+                  <span>{dashboardItem.title}</span>
                 </div>
               </SidebarMenuButton>
             </Link>
@@ -81,7 +81,7 @@ export function NavMain({
           className={section === "Other" ? "mt-10" : "mt-6"}
         >
           {section !== "Other" && (
-            <SidebarGroupLabel className="text-lg text-gray-700 tracking-wide px-6 pt-6 pb-4 font-semibold">
+            <SidebarGroupLabel className="text-lg text-gray-700 tracking-wide px-6 pt-6 pb-10 font-semibold">
               {section.toUpperCase()}
             </SidebarGroupLabel>
           )}
@@ -95,13 +95,13 @@ export function NavMain({
                     <SidebarMenuButton
                       onClick={() => setActiveTitle(item.title)}
                       tooltip={item.title}
-                      className={`flex items-center justify-between rounded-none border-l-4 px-6 py-4 text-xl font-semibold ${
+                      className={`flex items-center justify-between rounded-none border-l-4 px-6 py-4 text-xl font-semibold p-5 ${
                         isActive
                           ? "border-red-700 bg-muted text-red-700"
                           : "border-transparent text-muted-foreground"
                       }`}
                     >
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-5" >
                         {item.icon && (
                           <item.icon
                             className={`size-5 ${

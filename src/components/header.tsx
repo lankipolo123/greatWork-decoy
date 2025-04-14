@@ -23,9 +23,8 @@ export function Header({
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton size="lg" className="cursor-default">
+        <SidebarMenuButton>
         <>
-        <h1>LOGO</h1>
         </>
         </SidebarMenuButton>
       </SidebarMenuItem>
